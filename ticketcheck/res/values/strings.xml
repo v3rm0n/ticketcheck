@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- UI element texts -->
+    <string name="app_name">TicketChecker</string>
+    <string name="buttonstart">Start</string>
+    <string name="buttonstop">Stop</string>
+
+    <!-- Other texts -->
+    <string name="status">Staatus:</string>
+    <string name="interval">Intervall:</string>
+    <string name="show">Show:</string>
+    <string name="intervalstart">1 min</string>
+    <string name="intervalend">59</string>
+    <string name="minutes">min</string>
+    <string name="ticketshere">Piletid olemas</string>
+    <string name="notificationtitle">Piletid</string>
+    <string name="notificationtext">Piletid on jälle saadaval, kiirusta!</string>
+    <string name="started">Töötab</string>
+    <string name="stopped">Seisab</string>
+    <string name="startedwithinterval">Kontrollimine käivitatud intervalliga</string>
+    <string name="alarmstopped">Kontrollimine seisatud</string>
+    <string name="errorshow">Vigane show</string>
+
+</resources>

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/RelativeLayout1"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/statuslabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="60dp"
+        android:text="@string/status"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/statuslabel"
+        android:layout_alignBottom="@+id/statuslabel"
+        android:layout_marginLeft="20dp"
+        android:layout_toRightOf="@+id/statuslabel"
+        android:text="@string/stopped"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/intervalLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/statuslabel"
+        android:layout_below="@+id/statuslabel"
+        android:layout_marginTop="30dp"
+        android:text="@string/interval"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/interval"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/intervalLabel"
+        android:layout_alignBottom="@+id/intervalLabel"
+        android:layout_marginLeft="20dp"
+        android:layout_toRightOf="@+id/intervalLabel"
+        android:text="@string/intervalstart"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/showLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/intervalLabel"
+        android:layout_below="@+id/intervalLabel"
+        android:layout_marginTop="100dp"
+        android:text="@string/show"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <EditText
+        android:id="@+id/show"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/showLabel"
+        android:layout_alignBottom="@+id/showLabel"
+        android:layout_marginLeft="20dp"
+        android:layout_toRightOf="@+id/showLabel"
+        android:inputType="number" >
+
+        <requestFocus />
+    </EditText>
+
+    <SeekBar
+        android:id="@+id/intervalbar"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/interval"
+        android:layout_below="@+id/interval"
+        android:layout_marginTop="30dp"
+        android:max="@string/intervalend" />
+
+    <Button
+        android:id="@+id/buttonstart"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="60dp"
+        android:layout_toLeftOf="@+id/intervalbar"
+        android:text="@string/buttonstart" />
+
+    <Button
+        android:id="@+id/buttonstop"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/buttonstart"
+        android:layout_alignBottom="@+id/buttonstart"
+        android:layout_alignRight="@+id/intervalbar"
+        android:text="@string/buttonstop" />
+
+</RelativeLayout>
