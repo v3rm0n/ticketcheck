@@ -1,0 +1,4 @@
+Lihtne programm mis aitab piletilevis kontrollida, kas väljamüüdud üritusele on saabunud uusi pileteid.
+Hetkel töötab ainult Show'dega.
+
+Kasutamiseks pane programm käima, vali kontrollimise intervall ning sisesta show id (Number, mis on show piletilevi lehe URLis) ning vajuta Start.
