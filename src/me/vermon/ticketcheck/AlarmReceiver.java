@@ -34,11 +34,9 @@ public class AlarmReceiver extends BroadcastReceiver {
 	 * Schedules this broadcast receiver to run.
 	 */
 	public static void setAlarm(Context context, int minutes, int showId) {
-		AlarmManager mgr = (AlarmManager) context
-				.getSystemService(Context.ALARM_SERVICE);
+		AlarmManager mgr = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 		PendingIntent pi = getAlarmIntent(context, showId);
-		mgr.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP,
-				SystemClock.elapsedRealtime(), minutes * 60 * 1000, pi);
+		mgr.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime(), minutes * 60 * 1000, pi);
 		Log.d(TAG, "Event scheduled");
 	}
 
@@ -46,8 +44,7 @@ public class AlarmReceiver extends BroadcastReceiver {
 	 * Removes this broadcast receiver alarm.
 	 */
 	public static void removeAlarm(Context context) {
-		AlarmManager mgr = (AlarmManager) context
-				.getSystemService(Context.ALARM_SERVICE);
+		AlarmManager mgr = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 		PendingIntent alarmIntent = getAlarmIntent(context, 0);
 		mgr.cancel(alarmIntent);
 		alarmIntent.cancel();
@@ -59,8 +56,7 @@ public class AlarmReceiver extends BroadcastReceiver {
 	 */
 	public static boolean isAlarmSet(Context context) {
 		Intent i = new Intent(context, AlarmReceiver.class);
-		return PendingIntent.getBroadcast(context, 0, i,
-				PendingIntent.FLAG_NO_CREATE) != null;
+		return PendingIntent.getBroadcast(context, 0, i, PendingIntent.FLAG_NO_CREATE) != null;
 	}
 
 	private static PendingIntent getAlarmIntent(Context context, int showId) {
@@ -85,15 +81,11 @@ public class AlarmReceiver extends BroadcastReceiver {
 	private boolean checkTickets(int id) {
 		HttpURLConnection urlConnection = null;
 		try {
-			URL url = new URL(
-					"http://www.piletilevi.ee/est/piletid/teater/show/?concert="
-							+ id);
+			URL url = new URL("http://www.piletilevi.ee/est/piletid/teater/show/?concert=" + id);
 			urlConnection = (HttpURLConnection) url.openConnection();
-			InputStream in = new BufferedInputStream(
-					urlConnection.getInputStream());
+			InputStream in = new BufferedInputStream(urlConnection.getInputStream());
 			String str = new Scanner(in).useDelimiter("\\A").next();
-			boolean available = !str
-					.contains("concert_details_ticketprices_unavailable");
+			boolean available = !str.contains("concert_details_ticketprices_unavailable");
 			Log.d(TAG, "Tickets available: " + available);
 			return available;
 		} catch (Exception e) {
@@ -108,39 +100,28 @@ public class AlarmReceiver extends BroadcastReceiver {
 	}
 
 	private void notify(Context context) {
-		CharSequence ticketsAreHere = context.getResources().getText(
-				R.string.ticketshere);
-		Notification notification = new Notification(R.drawable.piletilevi,
-				ticketsAreHere, System.currentTimeMillis());
+		CharSequence ticketsAreHere = context.getResources().getText(R.string.ticketshere);
+		Notification notification = new Notification(R.drawable.piletilevi, ticketsAreHere, System.currentTimeMillis());
 		notification.flags |= Notification.FLAG_AUTO_CANCEL;
 
 		notification.sound = getSound();
 		notification.audioStreamType = AudioManager.STREAM_NOTIFICATION;
 
-		notification.vibrate = new long[] { 0, 200, 200, 500, 500, 200, 200,
-				500, 500, 200, 200, 500, 500, 200, 200, 500, 500, 200, 200,
-				500, 500, 200, 200, 500, 500, 200, 200, 500, 500, 200, 200,
-				500, 500, 200, 200, 500, 500, 200, 200, 500, 500, 200, 200,
-				500, 500, 200, 200, 500, 500, 200, 200, 500, 500, 200, 200,
-				500, 500, 200, 200, 500, 500, 200, 200, 500, 500, 200, 200,
-				500, 500, 200, 200, 500, 500 };
+		notification.vibrate = new long[] { 0, 200, 200, 500, 500, 200, 200, 500, 500, 200, 200, 500, 500, 200, 200, 500, 500, 200, 200, 500, 500, 200, 200,
+				500, 500, 200, 200, 500, 500, 200, 200, 500, 500, 200, 200, 500, 500, 200, 200, 500, 500, 200, 200, 500, 500, 200, 200, 500, 500, 200, 200,
+				500, 500, 200, 200, 500, 500, 200, 200, 500, 500, 200, 200, 500, 500, 200, 200, 500, 500, 200, 200, 500, 500 };
 
 		notification.defaults |= Notification.DEFAULT_LIGHTS;
 		notification.flags |= Notification.FLAG_SHOW_LIGHTS;
 
-		CharSequence contentTitle = context.getResources().getText(
-				R.string.notificationtitle);
-		CharSequence contentText = context.getResources().getText(
-				R.string.notificationtext);
+		CharSequence contentTitle = context.getResources().getText(R.string.notificationtitle);
+		CharSequence contentText = context.getResources().getText(R.string.notificationtext);
 		Intent notificationIntent = new Intent(context, AlarmReceiver.class);
-		PendingIntent contentIntent = PendingIntent.getActivity(context, 0,
-				notificationIntent, 0);
+		PendingIntent contentIntent = PendingIntent.getActivity(context, 0, notificationIntent, 0);
 
-		notification.setLatestEventInfo(context, contentTitle, contentText,
-				contentIntent);
+		notification.setLatestEventInfo(context, contentTitle, contentText, contentIntent);
 
-		NotificationManager manager = (NotificationManager) context
-				.getSystemService(Context.NOTIFICATION_SERVICE);
+		NotificationManager manager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 		manager.notify(1, notification);
 
 	}
@@ -148,11 +129,9 @@ public class AlarmReceiver extends BroadcastReceiver {
 	private Uri getSound() {
 		Uri alert = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
 		if (alert == null) {
-			alert = RingtoneManager
-					.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+			alert = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
 			if (alert == null) {
-				alert = RingtoneManager
-						.getDefaultUri(RingtoneManager.TYPE_RINGTONE);
+				alert = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE);
 			}
 		}
 		return alert;
