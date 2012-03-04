@@ -1,6 +1,5 @@
 package me.vermon.ticketcheck;
 
-import me.vermon.ticketcheck.R;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
@@ -67,19 +66,19 @@ public class TicketcheckActivity extends Activity {
 		stop.setOnClickListener(new View.OnClickListener() {
 
 			public void onClick(View v) {
-				int showId = getShowId();
-				if (showId != 0) {
-					AlarmReceiver.removeAlarm(TicketcheckActivity.this,
-							getShowId());
-					updateStatus();
-					Toast toast = Toast.makeText(TicketcheckActivity.this,
-							R.string.alarmstopped, Toast.LENGTH_SHORT);
-					toast.show();
-				} else {
-					showError();
-				}
+				AlarmReceiver.removeAlarm(TicketcheckActivity.this);
+				updateStatus();
+				Toast toast = Toast.makeText(TicketcheckActivity.this,
+						R.string.alarmstopped, Toast.LENGTH_SHORT);
+				toast.show();
 			}
 		});
+	}
+
+	@Override
+	protected void onStop() {
+		super.onStop();
+		finish();
 	}
 
 	private void showError() {

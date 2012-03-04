@@ -45,10 +45,10 @@ public class AlarmReceiver extends BroadcastReceiver {
 	/**
 	 * Removes this broadcast receiver alarm.
 	 */
-	public static void removeAlarm(Context context, int showId) {
+	public static void removeAlarm(Context context) {
 		AlarmManager mgr = (AlarmManager) context
 				.getSystemService(Context.ALARM_SERVICE);
-		PendingIntent alarmIntent = getAlarmIntent(context, showId);
+		PendingIntent alarmIntent = getAlarmIntent(context, 0);
 		mgr.cancel(alarmIntent);
 		alarmIntent.cancel();
 		Log.d(TAG, "Event canceled");
@@ -78,7 +78,7 @@ public class AlarmReceiver extends BroadcastReceiver {
 		boolean checkTickets = checkTickets(showId);
 		if (checkTickets) {
 			notify(context);
-			removeAlarm(context, showId);
+			removeAlarm(context);
 		}
 	}
 
